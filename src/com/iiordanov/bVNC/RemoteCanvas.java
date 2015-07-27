@@ -1686,8 +1686,8 @@ public class RemoteCanvas extends ImageView implements LibFreeRDP.UIEventListene
 //	protected void onDraw(Canvas canvas) {
 //		// TODO Auto-generated method stub
 //		canvas.save();
-//		canvas.translate(0, -getHeight()/2);
-//		canvas.rotate(90,0,getHeight()/2);
+//		canvas.translate(-50, 0);
+////		canvas.rotate(90,0,getHeight()/2);
 //		
 //		
 //		if (getDrawable()!=null) {

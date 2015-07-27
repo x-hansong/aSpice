@@ -32,7 +32,7 @@
                                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER"></category>
                         </intent-filter>
                 </activity>
-                <activity android:screenOrientation="portrait"
+                <activity android:screenOrientation="landscape"
                           android:configChanges="orientation|keyboardHidden|keyboard"
 		                  android:name="RemoteCanvasActivity"
 		                  android:windowSoftInputMode="stateHidden|adjustResize"

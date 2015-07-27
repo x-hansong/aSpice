@@ -106,15 +106,17 @@ class FitToScreenScaling extends AbstractScaling {
         canvas.absoluteYPosition = 0;
         canvasXOffset = -canvas.getCenteredXOffset();
         canvasYOffset = -canvas.getCenteredYOffset();
-        canvas.computeShiftFromFullToView ();
+//        canvas.computeShiftFromFullToView ();
         minimumScale = canvas.bitmapData.getMinimumScale();
         scaling = minimumScale;
+        
+        
 
-        resetMatrix();
-        matrix.postScale(scaling, scaling);
-        canvas.setImageMatrix(matrix);
-        resolveZoom(activity);
-        canvas.pan(0, 0);
+//        resetMatrix();
+//        matrix.postScale(scaling, scaling);
+//        canvas.setImageMatrix(matrix);
+//        resolveZoom(activity);
+//        canvas.pan(0, 0);
         activity.zoomer.setIsZoomOutEnabled(false);
         activity.zoomer.setIsZoomInEnabled(false);
     }

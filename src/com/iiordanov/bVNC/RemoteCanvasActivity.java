@@ -346,10 +346,11 @@ public class RemoteCanvasActivity extends Activity implements OnKeyListener {
             keyStow.setBackground(replacer);
         }
 
-        if (connection.getExtraKeysToggleType() == Constants.EXTRA_KEYS_OFF)
-            keyStow.setVisibility(View.GONE);
-        else
-            keyStow.setVisibility(View.VISIBLE);
+//        if (connection.getExtraKeysToggleType() == Constants.EXTRA_KEYS_OFF)
+//            keyStow.setVisibility(View.GONE);
+//        else
+//            keyStow.setVisibility(View.VISIBLE);
+        keyStow.setVisibility(View.GONE);
     }
     
     /**

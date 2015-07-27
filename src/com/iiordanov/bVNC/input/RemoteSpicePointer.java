@@ -1,6 +1,7 @@
 package com.iiordanov.bVNC.input;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -55,7 +56,7 @@ public class RemoteSpicePointer extends RemotePointer {
         mouseX=x;
         mouseY=y;
         vncCanvas.invalidateMousePosition();
-        //android.util.Log.i(TAG, "warp mouse to " + x + "," + y);
+        android.util.Log.i(TAG, "warp mouse to " + x + "," + y);
         //processPointerEvent(getX(), getY(), MotionEvent.ACTION_MOVE, 0, false, false, false, false, 0);
         rfb.writePointerEvent(x, y, 0, SPICE_MOUSE_BUTTON_MOVE);
     }
@@ -68,7 +69,7 @@ public class RemoteSpicePointer extends RemotePointer {
             int scrolly = vncCanvas.getAbsoluteY();
             int width = vncCanvas.getVisibleWidth();
             int height = vncCanvas.getVisibleHeight();
-            //Log.i(TAG,"scrollx " + scrollx + " scrolly " + scrolly + " mouseX " + mouseX +" Y " + mouseY + " w " + width + " h " + height);
+            Log.i(TAG,"scrollx " + scrollx + " scrolly " + scrolly + " mouseX " + mouseX +" Y " + mouseY + " w " + width + " h " + height);
             if (mouseX < scrollx || mouseX >= scrollx + width || mouseY < scrolly || mouseY >= scrolly + height) {
                 warpMouse(scrollx + width/2, scrolly + height / 2);
             }
@@ -204,27 +205,27 @@ public class RemoteSpicePointer extends RemotePointer {
         
         if (rfb != null && rfb.isInNormalProtocol()) {
             if (useRightButton) {
-                //android.util.Log.e("", "Mouse button right");
+                android.util.Log.e(TAG, "Mouse button right"+"x="+x+"  y="+y);
                 pointerMask = SPICE_MOUSE_BUTTON_RIGHT;
             } else if (useMiddleButton) {
-                //android.util.Log.e("", "Mouse button middle");
+                android.util.Log.e(TAG, "Mouse button middle"+"x="+x+"  y="+y);
                 pointerMask = SPICE_MOUSE_BUTTON_MIDDLE;
             } else if (action == MotionEvent.ACTION_DOWN) {
-                //android.util.Log.e("", "Mouse button left");
+                android.util.Log.e(TAG, "Mouse button left"+"x="+x+"  y="+y);
                 pointerMask = SPICE_MOUSE_BUTTON_LEFT;
             } else if (useScrollButton) {
                 if        ( direction == 0 ) {
-                    //android.util.Log.e("", "Scrolling up");
+                    android.util.Log.e(TAG, "Scrolling up"+"x="+x+"  y="+y);
                     pointerMask = SPICE_MOUSE_BUTTON_UP;
                 } else if ( direction == 1 ) {
-                    //android.util.Log.e("", "Scrolling down");
+                    android.util.Log.e(TAG, "Scrolling down"+"x="+x+"  y="+y);
                     pointerMask = SPICE_MOUSE_BUTTON_DOWN;
                 }
             } else if (action == MotionEvent.ACTION_MOVE) {
-                //android.util.Log.e("", "Mouse moving");
+                android.util.Log.e(TAG, "Mouse moving"+"x="+x+"  y="+y);
                 pointerMask = SPICE_MOUSE_BUTTON_MOVE;
             } else {
-                //android.util.Log.e("", "Setting previous mouse action with mouse not down.");
+                //android.util.Log.e(TAG, "Setting previous mouse action with mouse not down.");
                 // If none of the conditions are satisfied, then set the pointer mask to
                 // the previous mask so we can unpress any pressed buttons.
                 pointerMask = prevPointerMask;
@@ -241,10 +242,10 @@ public class RemoteSpicePointer extends RemotePointer {
             }
             
             if (mouseIsDown /*&& pointerMask != MOUSE_BUTTON_MOVE*/) {
-                //android.util.Log.e("", "Mouse pointer is down");
+                android.util.Log.e(TAG, "Mouse pointer is down"+"x="+x+"  y="+y);
                 pointerMask = pointerMask | PTRFLAGS_DOWN;
             } else {
-                //android.util.Log.e("", "Mouse pointer is up");
+                android.util.Log.e(TAG, "Mouse pointer is up"+"x="+x+"  y="+y);
                 prevPointerMask = 0;
             }
                         
@@ -257,7 +258,7 @@ public class RemoteSpicePointer extends RemotePointer {
             else if ( mouseY >= rfb.framebufferHeight()) mouseY = rfb.framebufferHeight() - 1;
             vncCanvas.invalidateMousePosition();
             
-            rfb.writePointerEvent(mouseX, mouseY, modifiers|vncCanvas.getKeyboard().getMetaState(), pointerMask);
+            rfb.writePointerEvent(mouseX-100, mouseY, modifiers|vncCanvas.getKeyboard().getMetaState(), pointerMask);
             return true;
         }
         return false;
